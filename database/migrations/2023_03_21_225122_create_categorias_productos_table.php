@@ -13,21 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('productos', function (Blueprint $table) {
+        Schema::create('categorias_productos', function (Blueprint $table) {
             $table->id();
 
-            $table->string('sku');
-            $table->string('nombre');
-
             $table->unsignedBigInteger('id_categoria');
-            $table->string('descripcion');
-            $table->double('precio',8,2);
-            $table->unsignedInteger('cantidad');
-            $table->enum('estado',['con inventario','sin inventario']);
+            $table->unsignedBigInteger('id_producto');
 
-           
-
-        
+            $table->foreign('id_categoria')->references('id')->on('categorias');
+            $table->foreign('id_producto')->references('id')->on('productos');
 
             $table->timestamps();
         });
@@ -40,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('inventario');
+        Schema::dropIfExists('categorias_productos');
     }
 };
