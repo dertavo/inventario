@@ -24,3 +24,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('categorias',CategoriasController::class);
 
 Route::resource('productos',ProductosController::class);
+
+Route::get('changeInv/{producto}/{cantidad}',[ProductosController::class,'changeInv'])
+->name('changeInv')
+;
+
+Route::get('rateProduct/{producto}/{cantidad}',[ProductosController::class,'rateProduct'])
+->name('rateProduct')
+;

@@ -5,7 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EvaluacionProducto extends Model
+use App\Model\Productos;
+
+class CalificacionProducto extends Model
 {
     use HasFactory;
 
@@ -14,4 +16,9 @@ class EvaluacionProducto extends Model
         "id_producto",
         "calificacion",
     ];
+
+    public function producto(): BelongsTo
+    {
+        return $this->belongsToMany(Productos::class);
+    }
 }

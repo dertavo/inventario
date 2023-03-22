@@ -39,7 +39,7 @@ export default{
                 alert(JSON.stringify(response['response']))
             }
 
-            console.log(response)
+          
         },
        
     },
@@ -53,7 +53,7 @@ export default{
                 }
             });
             const response = await r.json();
-            console.log(response['response'])
+           
             this.categorias= response['response']
 
     }

@@ -16,6 +16,7 @@
     },
     "dependencies": {
         "@vitejs/plugin-vue": "^4.1.0",
+        "vue-awesome": "^2.3.4",
         "vue-loader": "^17.0.1",
         "vue-router": "^4.1.6"
     }

@@ -15,13 +15,13 @@ return new class extends Migration
     {
         //
 
+        Schema::table('calificacion_producto', function (Blueprint $table) {
+        
+            $table->dropForeign(['id_producto']);
 
-        Schema::table('productos', function (Blueprint $table) {
-          
-
-           $table->foreign('id_categoria')->references('id')->on('categorias');
-          
-        });
+            $table->foreign('id_producto')->references('id')->on('productos')->onDelete('cascade');;
+           
+         });
     }
 
     /**

@@ -8,6 +8,8 @@ use Validator;
 
 use App\Models\Productos;
 
+use App\Models\CalificacionProducto;
+
 class ProductosController extends Controller
 {
     /**
@@ -18,6 +20,45 @@ class ProductosController extends Controller
     public function index()
     {
         //
+        $productos = Productos::with('calificaciones')
+        ->with('categorias')
+        ->get();
+
+    
+        return response()->json([
+            "response"=>$productos,
+            "code"=>200
+        ]);
+    }
+
+    public function rateProduct($producto,$rate){
+        CalificacionProducto::create([
+            "id_producto"=>$producto,
+            "calificacion"=>$rate,
+        ]);
+
+        return response()->json([
+            "response"=>"Calificación exitosa",
+            "code"=>200
+        ]);
+    }
+
+    public function changeInv($producto,$cantidad){
+        
+        if($cantidad == 0){
+            Productos::where('id',$producto)
+            ->update([
+                "cantidad"=>0,
+                "estado"=>"sin inventario"
+            ]);
+        }else{
+            Productos::where('id',$producto)
+            ->update([
+                "cantidad"=>$cantidad,
+                "estado"=>"con inventario"
+            ]);
+        }
+
     }
 
     /**
@@ -86,6 +127,14 @@ class ProductosController extends Controller
     public function show($id)
     {
         //
+
+        $producto = Productos::find($id);
+        $producto->categorias;
+
+        return response()->json([
+            "response"=>$producto,
+            "code"=>200,
+        ]);
     }
 
     /**
@@ -109,6 +158,41 @@ class ProductosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(),[
+            "sku"=>"required",
+            "nombre"=>"required",
+            "id_categoria"=>"required",
+            "descripcion"=>"required",
+            "precio"=>"required",
+            "cantidad"=>"required",
+            "estado"=>"required",
+        ]);
+
+        if($validator->fails()){
+
+            return response()->json([
+                "response"=>$validator->messages(),
+                "code"=>400,
+            ]);
+        }
+        $producto = Productos::where('id',$id)
+        ->update([
+            "sku"=>$request->sku,
+            "nombre"=>$request->nombre,
+            "id_categoria"=>$request->id_categoria,
+            "descripcion"=>$request->descripcion,
+            "precio"=>$request->precio,
+            "cantidad"=>$request->cantidad,
+            "estado"=>$request->estado,
+        ]);
+
+        if($producto){
+            return response()->json([
+                "response"=>"Producto actualizado",
+                "code"=>200,
+            ]);
+        }
+
     }
 
     /**
@@ -120,5 +204,14 @@ class ProductosController extends Controller
     public function destroy($id)
     {
         //
+
+        $p=Productos::find($id)
+        ->delete();
+        if($p){
+            return response()->json([
+                "response"=>"Producto eliminado",
+                "code"=>200,
+            ]);
+        }
     }
 }

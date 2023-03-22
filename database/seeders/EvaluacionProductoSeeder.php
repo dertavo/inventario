@@ -20,7 +20,7 @@ class EvaluacionProductoSeeder extends Seeder
         $productos  = Productos::all();
 
         foreach ($productos as $key => $producto) {
-            \App\Models\EvaluacionProducto::create([
+            \App\Models\CalificacionProducto::create([
                 'id_producto'   => $producto->id,
                 'calificacion' =>fake()->numberBetween(1, 5),
             ]);
