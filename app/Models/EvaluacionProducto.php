@@ -4,18 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Categorias;
 
-class Productos extends Model
+class EvaluacionProducto extends Model
 {
     use HasFactory;
 
+    protected $table ="calificacion_producto";
     protected $fillable =[
-
+        "id_producto",
+        "calificacion",
     ];
-
-    public function categorias()
-    {
-        return $this->hasMany(Categorias::class);
-    }
 }
