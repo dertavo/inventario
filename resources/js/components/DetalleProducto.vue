@@ -31,7 +31,10 @@
 
 
 <div class="col-md-5">
-<img>
+    <div class="col-md-12 p-4 d-flex justify-content-center">
+        <img src="../assets/watch.png">
+    </div>
+   
 
 </div>
 
@@ -58,7 +61,7 @@
     </div>
 
     <div>
-        <span v-if="producto.cantidad > 0 " 
+        <span v-if="producto.estado == 'con inventario' "  
             class="">Disponible-
         </span>
         <span v-else

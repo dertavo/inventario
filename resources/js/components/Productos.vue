@@ -63,8 +63,15 @@
 
     <div class="col-md-3">
 
+        <div class="col-md-12 p-4 d-flex justify-content-end">
+            <img src="../assets/watch.png">
+        </div>
+       
+        <div class="col-md-12 d-flex justify-content-center">
+            <RouterLink class="nav-link" :to="{path: '/detalle-producto/' + producto.id}" >Detalle</RouterLink>
+        </div>
 
-        <RouterLink class="nav-link" :to="{path: '/detalle-producto/' + producto.id}" >Detalle</RouterLink>
+       
     </div>
 
     <div class="col-md-6" style="padding-top:10px">
@@ -103,7 +110,7 @@
         </div>
   
     <div class="col-md-12 d-flex justify-content-center sep">
-    <span v-if="producto.cantidad > 0 " 
+    <span v-if="producto.estado == 'con inventario' " 
         class="badge rounded-pill bg-success">Disponible
     </span>
     <span v-else
