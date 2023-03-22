@@ -12,6 +12,15 @@ class Productos extends Model
 
     protected $fillable =[
 
+        "sku",
+        "nombre",
+        "id_categoria",
+        "descripcion",
+        "precio",
+        "cantidad",
+        "estado",
+        
+
     ];
 
     public function categorias()
